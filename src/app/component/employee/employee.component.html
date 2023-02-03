@@ -1,4 +1,4 @@
-<table class="table container p-3">
+<table class="table container p-3" *ngIf="showEmployee">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -10,32 +10,18 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Ahad</td>
-            <td>Ali</td>
-            <td>Associate Software Engineer</td>
-            <td>ahad.a@hsenid.com</td>
+        <tr *ngFor="let employee of allEmployees;">
+            <th scope="row">{{employee.id}}</th>
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.designation}}</td>
+            <td>{{employee.email}}</td>
             <td>
                 <div class="d-grid gap-2 d-md-block">
-                    <button type="button me-2" class="btn btn-outline-secondary" (click)="update(1)">Update</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                    <button type="button me-2" class="btn btn-outline-secondary" (click)="update(employee.id)">Update</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="delete(employee.id)">Delete</button>
                 </div>
             </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Ahad</td>
-            <td>Ali</td>
-            <td>Associate Software Engineer</td>
-            <td>ahad.a@hsenid.com</td>
-            <td>
-                <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn btn-outline-secondary">Update</button>
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
-                </div>
-            </td>
-
         </tr>
     </tbody>
 </table>
