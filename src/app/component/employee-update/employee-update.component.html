@@ -1,25 +1,44 @@
-<form class="container p-3 m-3">
+<div [hidden]="!showStatus">
+    <div class="alert alert-success">
+        Updated
+    </div>
+</div>
+
+<form #employeeForm="ngForm" method="post" class="container p-3 m-3">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Frist Name</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text text-danger"> Enter name</div>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            #fristName="ngModel" [(ngModel)]="employee.firstName"  pattern="^[a-zA-Z]+$" name="fname">
+        <div class="alert alert-danger" *ngIf="fristName.errors?.['pattern']">
+            Name should contain alphabet only
+        </div>
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text text-danger"> Enter name</div>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" #lastName="ngModel"
+            [(ngModel)]="employee.lastName"  pattern="^[a-zA-Z]+$" name="lname">
+        <div class="alert alert-danger" *ngIf="lastName.errors?.['pattern']">
+            Name should contain alphabet only
+        </div>
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <input type="email" class="form-control" id="exampleInputEmail1"  aria-describedby="emailHelp"
+            #email="ngModel" [(ngModel)]="employee.email" name="email"
+            pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+        <div class="alert alert-danger" *ngIf="email.errors?.['pattern']">
+            Please enter your email address
+        </div>
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Designation</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text text-danger"> Designation</div>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
+            #designation="ngModel" [(ngModel)]="employee.designation" name="designation">
+
     </div>
     <div class="text-center">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button [disabled]="employeeForm.invalid" (click)="updateEmployee(employeeForm)" type="submit"
+            class="btn btn-primary">Update</button>
     </div>
+
 </form>

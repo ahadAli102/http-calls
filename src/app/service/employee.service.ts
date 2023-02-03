@@ -9,6 +9,7 @@ import { Employee } from '../model/employee';
 })
 export class EmployeeService {
   
+  
   private API_URL = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
@@ -26,9 +27,19 @@ export class EmployeeService {
     );
   }
 
+  getEmployee(id:number):Observable<Employee> {
+    return this.http.get<Employee>(this.API_URL+'/employees/'+id);
+  }
+
   deleteEmployee(id: number) {
     return this.http.delete(this.API_URL + '/employees/' + id);
   }
 
+  addEmployee(employee: Employee) {
+    return this.http.put(this.API_URL +'/employees',employee);
+  }
 
+  updateEmployee(employee: Employee) {
+    return this.http.post(this.API_URL +'/employees/'+employee.id ,employee);
+  }
 }
